@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "./LangProvider";
-import ThemeToggle from "./ThemeToggle";
+import { ThemeToggle } from "./ThemeToggle";
 
 interface NavbarProps {
   locale: "es" | "en";
@@ -34,7 +34,7 @@ export function Navbar({ locale }: NavbarProps) {
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
           <a href={`/${locale}/`} className="flex items-center gap-2 text-xl font-bold text-text tracking-tight">
-            <span className="text-neon-cyan"><</span>AM<span className="text-neon-cyan">/></span>
+            <span className="text-neon-cyan">{'<'}</span>AM<span className="text-neon-cyan">{'/>'}</span>
           </a>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
             {links.map((link) => (

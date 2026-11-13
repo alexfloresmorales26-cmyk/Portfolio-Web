@@ -1,8 +1,8 @@
 ---
 import { ViewTransitions } from "astro:transitions";
-import Navbar from "../components/Navbar";
-import ThemeToggle from "../components/ThemeToggle";
-import LangProvider from "../components/LangProvider";
+import { Navbar } from "../components/Navbar";
+import { ThemeToggle } from "../components/ThemeToggle";
+import { LangProvider } from "../components/LangProvider";
 
 interface Props {
   locale: "es" | "en";
@@ -63,7 +63,7 @@ const localeURL = new URL(`/${locale}${Astro.url.pathname}`, Astro.site).toStrin
   </head>
   <body class="bg-bg text-text antialiased">
     <ViewTransitions />
-    <LangProvider locale={locale}>
+    <LangProvider locale={locale} defaultLocale="es">
       <ThemeToggle />
       <Navbar locale={locale} />
       <main id="main-content">
