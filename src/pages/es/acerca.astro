@@ -21,13 +21,10 @@ const technicalStrengths = {
     { title: "Automatización & Scripting", desc: "Automatización de tareas repetitivas y scripts de productividad." },
   ],
   tools: [
-    { name: "Linux Mint / Entornos Linux", highlight: true },
     { name: "Git & GitHub", highlight: true },
     { name: "Terminal / Bash", highlight: true },
-    { name: "VS Code", highlight: false },
-    { name: "Astro", highlight: false },
-    { name: "React", highlight: false },
-    { name: "Tailwind CSS", highlight: false },
+    { name: "Editores (VS Code)", highlight: false },
+    { name: "Astro & React", highlight: false },
   ],
 };
 
@@ -167,24 +164,38 @@ export const prerender = true;
             </ul>
           </div>
 
-          {/* Herramientas y Entornos */}
+          {/* Entornos Linux y Herramientas */}
           <div class="border-glow p-6 space-y-4">
             <h4 class="text-base font-bold text-text flex items-center gap-2">
-              <span class="text-neon-green font-mono text-lg">⚙</span>
+              <span class="text-neon-green font-mono text-lg">🐧</span>
               {t.about.toolsTitle}
             </h4>
-            <div class="flex flex-wrap gap-2">
-              {technicalStrengths.tools.map((tool) => (
-                <span
-                  class={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
-                    tool.highlight
-                      ? "bg-neon-green/10 border border-neon-green text-neon-green font-bold shadow-[0_0_12px_rgba(52,211,153,0.2)]"
-                      : "bg-surface-hover border border-border text-text-muted hover:border-text-muted"
-                  }`}
-                >
-                  {tool.name}
-                </span>
-              ))}
+
+            <div class="p-3.5 bg-surface/80 rounded-xl border border-neon-green/30 space-y-1.5 shadow-[0_0_15px_rgba(52,211,153,0.1)]">
+              <p class="text-xs font-bold text-neon-green flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-neon-green"></span>
+                {t.about.linuxTitle}:
+              </p>
+              <p class="text-xs text-text-muted leading-relaxed">
+                {t.about.linuxDesc}
+              </p>
+            </div>
+
+            <div class="space-y-2 pt-1">
+              <p class="text-[11px] font-mono uppercase tracking-wider text-text-muted font-semibold">Herramientas clave</p>
+              <div class="flex flex-wrap gap-2">
+                {technicalStrengths.tools.map((tool) => (
+                  <span
+                    class={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                      tool.highlight
+                        ? "bg-neon-green/10 border border-neon-green text-neon-green font-bold shadow-[0_0_12px_rgba(52,211,153,0.2)]"
+                        : "bg-surface-hover border border-border text-text-muted hover:border-text-muted"
+                    }`}
+                  >
+                    {tool.name}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>

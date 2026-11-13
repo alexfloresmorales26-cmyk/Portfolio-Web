@@ -31,7 +31,9 @@ export const es = {
     skills: "Fortalezas Técnicas",
     languagesTitle: "Lenguajes Principales",
     areasTitle: "Áreas de Interés",
-    toolsTitle: "Herramientas y Entornos",
+    toolsTitle: "Entornos Linux y Herramientas",
+    linuxTitle: "Entorno y Software Libre",
+    linuxDesc: "Pasión por entornos de desarrollo eficientes y personalizados, utilizando Linux Mint, editores a medida y herramientas de terminal.",
   },
   projects: {
     title: "Mis Proyectos",
