@@ -15,17 +15,17 @@ const LangContext = createContext<LangContextType | undefined>(undefined);
 
 // Pre-load translations at module level for SSR
 const translationModules = {
-  es: () => import("../content/config/translations/es.ts").then(m => m.es),
-  en: () => import("../content/config/translations/en.ts").then(m => m.en),
+  es: () => import("../i18n/translations/es").then((m) => m.es),
+  en: () => import("../i18n/translations/en").then((m) => m.en),
 };
 
-export function LangProvider({ 
-  children, 
-  defaultLocale, 
-  locale: forcedLocale 
-}: { 
-  children: React.ReactNode; 
-  defaultLocale: Locale;
+export function LangProvider({
+  children,
+  defaultLocale: _defaultLocale,
+  locale: forcedLocale,
+}: {
+  children: React.ReactNode;
+  defaultLocale?: Locale;
   locale: Locale;
 }) {
   const [locale, setLocaleState] = useState<Locale>(forcedLocale);
@@ -43,44 +43,48 @@ export function LangProvider({
     });
   }, [locale]);
 
-  const setLocale = useCallback((next: Locale) => {
-    if (isClient) {
-      setLocaleState(next);
-      window.location.href = `/${next}/`;
-    }
-  }, [isClient]);
+  const setLocale = useCallback(
+    (next: Locale) => {
+      if (isClient) {
+        setLocaleState(next);
+        const currentPath = window.location.pathname.replace(/^\/(es|en)/, "") || "/";
+        window.location.href = `/${next}${currentPath === "/" ? "/" : currentPath}`;
+      }
+    },
+    [isClient]
+  );
 
-  const t = useCallback((key: string): string => {
-    const dict = loadedTranslations;
-    const parts = key.split(".");
-    let val: unknown = dict;
-    for (const part of parts) {
-      if (val == null || typeof val !== "object") return key;
-      val = (val as Record<string, unknown>)[part];
-    }
-    return typeof val === "string" ? val : key;
-  }, [loadedTranslations]);
+  const t = useCallback(
+    (key: string): string => {
+      const dict = loadedTranslations;
+      const parts = key.split(".");
+      let val: unknown = dict;
+      for (const part of parts) {
+        if (val == null || typeof val !== "object") return key;
+        val = (val as Record<string, unknown>)[part];
+      }
+      return typeof val === "string" ? val : key;
+    },
+    [loadedTranslations]
+  );
 
-  // During SSR, if no translations loaded yet, provide a minimal fallback
   const fallbackT = useCallback((key: string): string => key, []);
 
-  const value = useMemo(() => ({
-    locale,
-    setLocale,
-    t: loadedTranslations && Object.keys(loadedTranslations).length > 0 ? t : fallbackT,
-  }), [locale, setLocale, t, loadedTranslations]);
-
-  return (
-    <LangContext.Provider value={value}>
-      {children}
-    </LangContext.Provider>
+  const value = useMemo(
+    () => ({
+      locale,
+      setLocale,
+      t: loadedTranslations && Object.keys(loadedTranslations).length > 0 ? t : fallbackT,
+    }),
+    [locale, setLocale, t, loadedTranslations, fallbackT]
   );
+
+  return <LangContext.Provider value={value}>{children}</LangContext.Provider>;
 }
 
 export function useLang() {
   const ctx = useContext(LangContext);
   if (!ctx) {
-    // Fallback for SSR when context is not available
     return {
       locale: "es" as Locale,
       setLocale: () => {},

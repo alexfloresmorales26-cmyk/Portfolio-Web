@@ -1,11 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { es } from "../../content/config/translations/es";
-import { en } from "../../content/config/translations/en";
+import { es } from "../../i18n/translations/es";
 
-const { locale } = Astro.params;
-const dict = locale === "en" ? en : es;
-const t = dict;
+const locale = "es";
+const t = es;
 
 const services = [
   { title: t.services.webDev.title, desc: t.services.webDev.desc, icon: "💻", color: "neon-cyan" },
@@ -16,7 +14,7 @@ const services = [
 export const prerender = true;
 ---
 
-<BaseLayout locale={locale as "es" | "en"} title={t.services.title} description={t.services.subtitle}>
+<BaseLayout locale={locale} title={t.services.title} description={t.services.subtitle}>
   <section class="py-20 px-6">
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-16">
@@ -25,7 +23,7 @@ export const prerender = true;
       </div>
       <div class="grid md:grid-cols-3 gap-8">
         {services.map((s) => (
-          <div class="border-glow p-8 hover:border-[var(--neon-${s.color})] transition-all group">
+          <div class="border-glow p-8 transition-all group">
             <div class="w-14 h-14 rounded-2xl bg-surface-hover flex items-center justify-center text-3xl mb-6 border border-border group-hover:scale-110 transition-transform">{s.icon}</div>
             <h3 class="text-xl font-bold text-text mb-3">{s.title}</h3>
             <p class="text-text-muted leading-relaxed text-sm">{s.desc}</p>
@@ -38,9 +36,3 @@ export const prerender = true;
     </div>
   </section>
 </BaseLayout>
-
-<style is:global>
-  body { margin: 0; font-family: 'Space Grotesk', sans-serif; background: #050507; color: #fff; }
-  a { color: #22d3ee; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-</style>

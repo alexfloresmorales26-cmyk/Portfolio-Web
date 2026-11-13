@@ -1,30 +1,28 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { es } from "../../content/config/translations/es";
-import { en } from "../../content/config/translations/en";
+import { es } from "../../i18n/translations/es";
 
-const { locale } = Astro.params;
-const dict = locale === "en" ? en : es;
-const t = dict;
+const locale = "es";
+const t = es;
 
 const schoolProjects = [
   {
     title: "Sistema de Gestión Escolar",
     desc: "Plataforma para administración de notas, asistencia y horarios de alumnos.",
     tech: ["React", "Node.js", "MySQL", "Tailwind"],
-    link: "#",
+    link: "https://github.com/alexfloresmorales26-cmyk",
   },
   {
     title: "E-Commerce Académico",
     desc: "Tienda en línea para venta de materiales escolares con pasarela de pago.",
     tech: ["Astro", "TypeScript", "Stripe", "Tailwind"],
-    link: "#",
+    link: "https://github.com/alexfloresmorales26-cmyk",
   },
   {
     title: "App de Tareas (To-Do)",
     desc: "Aplicación de productividad con sincronización en tiempo real.",
     tech: ["React", "Firebase", "Tailwind"],
-    link: "#",
+    link: "https://github.com/alexfloresmorales26-cmyk",
   },
 ];
 
@@ -33,13 +31,13 @@ const personalProjects = [
     title: "Portafolio Web Personal",
     desc: "Este sitio web desarrollado con Astro, Tailwind v4 y Framer Motion.",
     tech: ["Astro", "Tailwind", "Framer Motion", "MDX"],
-    link: "#",
+    link: "https://github.com/alexfloresmorales26-cmyk/Portfolio-Web",
   },
   {
     title: "Dashboard de Productividad",
     desc: "Tablero personal para organización de tareas y seguimiento de hábitos.",
     tech: ["React", "TypeScript", "Tailwind", "LocalStorage"],
-    link: "#",
+    link: "https://github.com/alexfloresmorales26-cmyk",
   },
 ];
 
@@ -47,7 +45,7 @@ export const prerender = true;
 ---
 
 <BaseLayout
-  locale={locale as "es" | "en"}
+  locale={locale}
   title={t.projects.title}
   description={t.projects.subtitle}
 >
@@ -66,7 +64,9 @@ export const prerender = true;
             <p class="text-text-muted text-sm">{t.projects.schoolDesc}</p>
           </div>
           <a
-            href="#"
+            href="https://github.com/alexfloresmorales26-cmyk"
+            target="_blank"
+            rel="noopener noreferrer"
             class="text-neon-cyan text-sm font-medium hover:text-neon-cyan/80 transition-colors"
           >
             Ver todos →
@@ -78,7 +78,7 @@ export const prerender = true;
               <div class="h-32 bg-surface-hover rounded-xl border border-border mb-4 flex items-center justify-center text-text-muted text-sm font-mono">
                 {p.title}
               </div>
-              <p class="text-text-sm text-text-muted mb-4 line-clamp-3">{p.desc}</p>
+              <p class="text-sm text-text-muted mb-4 line-clamp-3">{p.desc}</p>
               <div class="flex flex-wrap gap-2 mb-4">
                 {p.tech.map((tech) => (
                   <span class="px-2 py-1 bg-surface border border-border rounded text-xs font-mono text-neon-cyan">{tech}</span>
@@ -86,7 +86,7 @@ export const prerender = true;
               </div>
               <a
                 href={p.link}
-                class="w-full py-2 border border-neon-cyan text-neon-cyan text-sm font-semibold rounded hover:bg-neon-cyan hover:text-bg transition-all"
+                class="w-full py-2 border border-neon-cyan text-neon-cyan text-sm font-semibold rounded hover:bg-neon-cyan hover:text-bg transition-all inline-block text-center"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -105,7 +105,9 @@ export const prerender = true;
             <p class="text-text-muted text-sm">{t.projects.personalDesc}</p>
           </div>
           <a
-            href="#"
+            href="https://github.com/alexfloresmorales26-cmyk"
+            target="_blank"
+            rel="noopener noreferrer"
             class="text-neon-cyan text-sm font-medium hover:text-neon-cyan/80 transition-colors"
           >
             Ver todos →
@@ -117,7 +119,7 @@ export const prerender = true;
               <div class="h-32 bg-surface-hover rounded-xl border border-border mb-4 flex items-center justify-center text-text-muted text-sm font-mono">
                 {p.title}
               </div>
-              <p class="text-text-sm text-text-muted mb-4 line-clamp-3">{p.desc}</p>
+              <p class="text-sm text-text-muted mb-4 line-clamp-3">{p.desc}</p>
               <div class="flex flex-wrap gap-2 mb-4">
                 {p.tech.map((tech) => (
                   <span class="px-2 py-1 bg-surface border border-border rounded text-xs font-mono text-neon-cyan">{tech}</span>
@@ -125,7 +127,7 @@ export const prerender = true;
               </div>
               <a
                 href={p.link}
-                class="w-full py-2 border border-neon-magenta text-neon-magenta text-sm font-semibold rounded hover:bg-neon-magenta hover:text-bg transition-all"
+                class="w-full py-2 border border-neon-magenta text-neon-magenta text-sm font-semibold rounded hover:bg-neon-magenta hover:text-bg transition-all inline-block text-center"
                 target="_blank"
                 rel="noopener noreferrer"
               >
@@ -138,9 +140,3 @@ export const prerender = true;
     </div>
   </section>
 </BaseLayout>
-
-<style is:global>
-  body { margin: 0; font-family: 'Space Grotesk', sans-serif; background: #050507; color: #fff; }
-  a { color: #22d3ee; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-</style>

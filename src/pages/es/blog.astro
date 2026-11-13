@@ -1,9 +1,9 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
-import { es } from "../../content/config/translations/es";
+import { es } from "../../i18n/translations/es";
 
-const { locale } = Astro.params;
+const locale = "es";
 const t = es;
 
 const posts = (await getCollection("blog")).sort(
@@ -13,7 +13,7 @@ const posts = (await getCollection("blog")).sort(
 export const prerender = true;
 ---
 
-<BaseLayout locale={locale as "es" | "en"} title={t.blog.title} description={t.blog.subtitle}>
+<BaseLayout locale={locale} title={t.blog.title} description={t.blog.subtitle}>
   <section class="py-20 px-6">
     <div class="max-w-5xl mx-auto">
       <div class="text-center mb-16">
@@ -29,7 +29,7 @@ export const prerender = true;
         <div class="grid md:grid-cols-2 gap-8">
           {posts.map((post) => (
             <a
-              href={`/es/blog/${post.slug}`}
+              href={`/es/blog/${post.id}`}
               class="border-glow p-6 hover:border-neon-cyan/50 transition-all group block"
             >
               <h3 class="text-xl font-bold text-text mb-2 group-hover:text-neon-cyan transition-colors">
@@ -47,9 +47,3 @@ export const prerender = true;
     </div>
   </section>
 </BaseLayout>
-
-<style is:global>
-  body { margin: 0; font-family: 'Space Grotesk', sans-serif; background: #050507; color: #fff; }
-  a { color: #22d3ee; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-</style>

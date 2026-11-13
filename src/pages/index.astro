@@ -1,8 +1,20 @@
 ---
-import { defaultLocale } from "../content/config/i18n";
+import { defaultLocale } from "../i18n/i18n";
+
 export const prerender = true;
 ---
 
-<script is:inline>
-  window.location.href = `/${defaultLocale}/`;
-</script>
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="refresh" content={`0;url=/${defaultLocale}/`} />
+    <title>Alejandro Flores Morales</title>
+    <script define:vars={{ defaultLocale }}>
+      window.location.href = `/${defaultLocale}/`;
+    </script>
+  </head>
+  <body class="bg-[#050507] text-white">
+    <p class="p-4">Redirigiendo a <a href={`/${defaultLocale}/`} class="text-cyan-400">/{defaultLocale}/</a>...</p>
+  </body>
+</html>

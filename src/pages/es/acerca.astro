@@ -1,17 +1,15 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { es } from "../../content/config/translations/es";
-import { en } from "../../content/config/translations/en";
+import { es } from "../../i18n/translations/es";
 
-const { locale } = Astro.params;
-const dict = locale === "en" ? en : es;
-const t = dict;
+const locale = "es";
+const t = es;
 
 export const prerender = true;
 ---
 
 <BaseLayout
-  locale={locale as "es" | "en"}
+  locale={locale}
   title={t.about.title}
   description={`${t.about.name} - ${t.about.role}`}
 >
@@ -27,13 +25,7 @@ export const prerender = true;
         <div class="absolute -inset-1 bg-gradient-to-r from-neon-cyan to-neon-magenta rounded-2xl blur opacity-30" />
         <div class="relative border-glow p-1">
           <div class="bg-surface rounded-2xl p-8 border border-border">
-            <img
-              src="/images/profile.svg"
-              alt="Perfil Alejandro"
-              class="w-48 h-48 rounded-xl mx-auto mb-6 object-cover border border-border"
-              onerror="this.style.display='none'"
-            />
-            <div class="w-48 h-48 rounded-xl mx-auto mb-6 bg-surface-hover border border-border flex items-center justify-center text-neon-cyan text-2xl" aria-hidden="true">AM</div>
+            <div class="w-48 h-48 rounded-xl mx-auto mb-6 bg-surface-hover border border-border flex items-center justify-center text-neon-cyan text-2xl font-bold font-mono" aria-hidden="true">AM</div>
             <h2 class="text-3xl font-bold text-text mb-2">{t.about.name}</h2>
             <p class="text-neon-cyan font-semibold text-lg mb-4">{t.about.role}</p>
             <p class="text-text-muted leading-relaxed text-sm">{t.about.bio}</p>
@@ -86,9 +78,3 @@ export const prerender = true;
     </div>
   </section>
 </BaseLayout>
-
-<style is:global>
-  body { margin: 0; font-family: 'Space Grotesk', sans-serif; background: #050507; color: #fff; }
-  a { color: #22d3ee; text-decoration: none; }
-  a:hover { text-decoration: underline; }
-</style>
