@@ -60,6 +60,13 @@ export const es = {
     emailPlaceholder: "tu@correo.com",
     messagePlaceholder: "Cuéntame sobre tu proyecto...",
   },
+  blog: {
+    title: "Blog",
+    subtitle: "Artículos, tutoriales y pensamientos sobre desarrollo",
+    noPosts: "Aún no hay publicaciones. ¡Vuelve pronto!",
+    readMore: "Leer más",
+    backToBlog: "Volver al blog",
+  },
   footer: {
     rights: "Todos los derechos reservados.",
     madeWith: "Hecho con ❤️ y mucho neón",

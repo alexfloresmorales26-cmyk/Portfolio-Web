@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, useCallback } from "react";
+import { createContext, useContext, useEffect, useState, useCallback, useMemo } from "react";
 
 type Locale = "es" | "en";
 type TranslationFn = (key: string) => string;
@@ -13,13 +13,19 @@ interface LangContextType {
 
 const LangContext = createContext<LangContextType | undefined>(undefined);
 
-const translations: Record<Locale, Record<string, unknown>> = {
-  es: (await import("@/content/config/translations/es")).es,
-  en: (await import("@/content/config/translations/en")).en,
-};
+async function loadTranslations(locale: Locale) {
+  if (locale === "es") {
+    const { es } = await import("@/content/config/translations/es");
+    return es;
+  } else {
+    const { en } = await import("@/content/config/translations/en");
+    return en;
+  }
+}
 
 export function LangProvider({ children, defaultLocale }: { children: React.ReactNode; defaultLocale: Locale }) {
   const [locale, setLocaleState] = useState<Locale>(defaultLocale);
+  const [translations, setTranslations] = useState<Record<string, unknown>>({});
 
   useEffect(() => {
     const path = window.location.pathname;
@@ -29,10 +35,16 @@ export function LangProvider({ children, defaultLocale }: { children: React.Reac
     }
   }, []);
 
-  const setLocale = useCallback((next: Locale) => { setLocaleState(next); }, []);
+  useEffect(() => {
+    loadTranslations(locale).then(setTranslations);
+  }, [locale]);
+
+  const setLocale = useCallback((next: Locale) => {
+    setLocaleState(next);
+  }, []);
 
   const t = useCallback((key: string): string => {
-    const dict = translations[locale];
+    const dict = translations;
     const parts = key.split(".");
     let val: unknown = dict;
     for (const part of parts) {
@@ -40,7 +52,7 @@ export function LangProvider({ children, defaultLocale }: { children: React.Reac
       val = (val as Record<string, unknown>)[part];
     }
     return typeof val === "string" ? val : key;
-  }, [locale]);
+  }, [translations]);
 
   return (
     <LangContext.Provider value={{ locale, setLocale, t }}>

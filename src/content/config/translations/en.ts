@@ -60,6 +60,13 @@ export const en = {
     emailPlaceholder: "you@email.com",
     messagePlaceholder: "Tell me about your project...",
   },
+  blog: {
+    title: "Blog",
+    subtitle: "Articles, tutorials and thoughts on development",
+    noPosts: "No posts yet. Check back soon!",
+    readMore: "Read more",
+    backToBlog: "Back to blog",
+  },
   footer: {
     rights: "All rights reserved.",
     madeWith: "Made with ❤️ and lots of neon",

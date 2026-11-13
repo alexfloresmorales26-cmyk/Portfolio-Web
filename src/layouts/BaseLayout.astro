@@ -1,0 +1,186 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import Navbar from "@/components/Navbar";
+import ThemeToggle from "@/components/ThemeToggle";
+import LangProvider from "@/components/LangProvider";
+
+interface Props {
+  locale: "es" | "en";
+  title: string;
+  description: string;
+}
+
+const { locale, title, description } = Astro.props;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).toString();
+const localeURL = new URL(`/${locale}${Astro.url.pathname}`, Astro.site).toString();
+---
+
+<!DOCTYPE html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="alternate" hreflang="es" href={new URL("/es" + Astro.url.pathname, Astro.site).toString()} />
+    <link rel="alternate" hreflang="en" href={new URL("/en" + Astro.url.pathname, Astro.site).toString()} />
+    <link rel="alternate" hreflang="x-default" href={new URL("/es" + Astro.url.pathname, Astro.site).toString()} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:site_name" content="Alejandro Flores Morales" />
+    <meta property="og:locale" content={locale === "es" ? "es_ES" : "en_US"} />
+    <meta property="og:locale:alternate" content={locale === "es" ? "en_US" : "es_ES"} />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Person",
+      name: "Alejandro Flores Morales",
+      url: Astro.site,
+      sameAs: [
+        "https://github.com/alexfloresmorales26-cmyk",
+        "https://www.linkedin.com/in/alejandro-flores-morales-undefined-50035144b/",
+      ],
+      jobTitle: "Computer Systems Engineering Student",
+      worksFor: {
+        "@type": "Organization",
+        name: "Freelance",
+      },
+      knowsAbout: ["Web Development", "Full Stack Development", "Equipment Repair", "React", "Astro", "TypeScript", "Tailwind CSS"],
+    }, null, 2)} />
+
+    <title>{title} | Alejandro Flores Morales</title>
+    <meta name="description" content={description} />
+  </head>
+  <body class="bg-bg text-text antialiased">
+    <ViewTransitions />
+    <LangProvider locale={locale}>
+      <ThemeToggle />
+      <Navbar locale={locale} />
+      <main id="main-content">
+        <slot />
+      </main>
+      <footer class="border-t border-border py-8 px-6">
+        <div class="max-w-7xl mx-auto text-center text-text-muted text-sm font-mono">
+          <p>{locale === "es" ? "Todos los derechos reservados." : "All rights reserved."}</p>
+          <p class="mt-1">{locale === "es" ? "Hecho con ❤️ y mucho neón" : "Made with ❤️ and lots of neon"}</p>
+        </div>
+      </footer>
+    </LangProvider>
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --neon-cyan: #22d3ee;
+    --neon-magenta: #f43f5e;
+    --neon-green: #22c55e;
+    --bg: #050507;
+    --surface: #0d0d10;
+    --surface-hover: #141418;
+    --border: #1f1f23;
+    --text: #f1f1f3;
+    --text-muted: #7a7a8a;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  a {
+    color: var(--neon-cyan);
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  ::selection {
+    background: var(--neon-cyan);
+    color: var(--bg);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--neon-cyan);
+  }
+
+  /* Focus visible */
+  :focus-visible {
+    outline: 2px solid var(--neon-cyan);
+    outline-offset: 2px;
+  }
+
+  /* Prose styles for blog content */
+  .prose {
+    color: var(--text);
+  }
+
+  .prose h1, .prose h2, .prose h3, .prose h4 {
+    color: var(--text);
+    font-weight: 700;
+    line-height: 1.3;
+  }
+
+  .prose h1 { font-size: 2.5rem; margin-top: 2.5rem; margin-bottom: 1rem; }
+  .prose h2 { font-size: 1.875rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+  .prose h3 { font-size: 1.5rem; margin-top: 1.5rem; margin-bottom: 0.5rem; }
+
+  .prose p { margin-top: 1rem; margin-bottom: 1rem; }
+  .prose code { background: var(--surface); padding: 0.2em 0.4em; border-radius: 0.25rem; font-size: 0.875em; }
+  .prose pre { background: var(--surface); border: 1px solid var(--border); border-radius: 0.5rem; padding: 1rem; overflow-x: auto; margin: 1.5rem 0; }
+  .prose pre code { background: transparent; padding: 0; }
+  .prose a { color: var(--neon-cyan); text-decoration: underline; }
+  .prose blockquote { border-left: 3px solid var(--neon-cyan); padding-left: 1rem; margin: 1.5rem 0; color: var(--text-muted); font-style: italic; }
+  .prose ul, .prose ol { margin: 1rem 0; padding-left: 1.5rem; }
+  .prose li { margin: 0.5rem 0; }
+  .prose img { border-radius: 0.5rem; border: 1px solid var(--border); }
+  .prose hr { border-color: var(--border); margin: 2rem 0; }
+
+  /* Table of contents */
+  nav a {
+    display: block;
+    transition: color 0.2s;
+  }
+
+  nav a:hover {
+    color: var(--neon-cyan) !important;
+    text-decoration: none;
+  }
+</style>

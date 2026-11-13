@@ -1,0 +1,58 @@
+---
+title: "Building a Portfolio with Framer Motion Animations"
+description: "Create smooth, performant animations for your developer portfolio using Framer Motion"
+pubDate: 2024-11-12
+updatedDate: 2024-11-12
+heroImage: "/blog/framer-motion.jpg"
+tags: ["framer-motion", "react", "animations", "portfolio"]
+readingTime: 6
+draft: false
+---
+
+# Building a Portfolio with Framer Motion Animations
+
+Framer Motion makes it easy to add beautiful, performant animations to your React components. Here's how I built the animations for this portfolio.
+
+## Scroll-Triggered Animations
+
+Using `useScroll` and `useTransform` from Framer Motion, you can create animations that respond to scroll position:
+
+```tsx
+import { motion, useScroll, useTransform } from "framer-motion";
+
+export function Hero() {
+  const { scrollY } = useScroll();
+  const y = useTransform(scrollY, [0, 500], [0, -100]);
+
+  return (
+    <motion.div style={{ y }}>
+      <h1>Animated Hero</h1>
+    </motion.div>
+  );
+}
+```
+
+## Bounce Animation on Scroll
+
+The hero section uses a bounce animation that triggers when the element comes into view:
+
+```tsx
+const bounceVariants = {
+  hidden: { opacity: 0, y: 50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100, damping: 10 }
+  }
+};
+```
+
+## Performance Tips
+
+- Use `transform` and `opacity` for animations (GPU accelerated)
+- Avoid animating layout properties like `width`, `height`, `top`, `left`
+- Use `will-change` sparingly
+
+## Conclusion
+
+Framer Motion provides a declarative API that makes complex animations simple. Perfect for adding that professional polish to your portfolio.

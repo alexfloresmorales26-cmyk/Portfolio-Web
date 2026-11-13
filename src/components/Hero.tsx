@@ -40,7 +40,7 @@ export function Hero({ t, locale }: HeroProps) {
         <h2 className="text-3xl md:text-5xl font-bold text-neon-cyan tracking-wide">{intro}</h2>
         <p className="text-lg md:text-xl text-text-muted max-w-2xl mx-auto leading-relaxed">{subtitle}</p>
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <a href="/es/contacto" className="px-8 py-3 bg-neon-cyan text-bg font-bold rounded-full hover:bg-neon-cyan/90 transition-all shadow-[0_0_20px_rgba(34,211,238,0.6)] hover:shadow-[0_0_30px_rgba(34,211,238,0.8)]">{t("hero.hire")}</a>
+          <a href={`/${locale}/contacto`} className="px-8 py-3 bg-neon-cyan text-bg font-bold rounded-full hover:bg-neon-cyan/90 transition-all shadow-[0_0_20px_rgba(34,211,238,0.6)] hover:shadow-[0_0_30px_rgba(34,211,238,0.8)]">{t("hero.hire")}</a>
           <a href="#" className="px-8 py-3 border border-border text-text rounded-full hover:border-neon-cyan hover:text-neon-cyan transition-all">{t("hero.downloadCv")}</a>
         </div>
         <div className="mt-8 flex items-center justify-center gap-4 text-text-muted text-sm">

@@ -3,17 +3,22 @@
 import { useState, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLang } from "./LangProvider";
+import ThemeToggle from "./ThemeToggle";
 
-export function Navbar() {
+interface NavbarProps {
+  locale: "es" | "en";
+}
+
+export function Navbar({ locale }: NavbarProps) {
   const [isOpen, setIsOpen] = useState(false);
-  const { t, locale, setLocale } = useLang();
+  const { t, setLocale } = useLang();
 
   const links = [
-    { href: "/es/", label: t("nav.home") },
-    { href: "/es/acerca", label: t("nav.about") },
-    { href: "/es/proyectos", label: t("nav.projects") },
-    { href: "/es/servicios", label: t("nav.services") },
-    { href: "/es/contacto", label: t("nav.contact") },
+    { href: `/${locale}/`, label: t("nav.home") },
+    { href: `/${locale}/acerca`, label: t("nav.about") },
+    { href: `/${locale}/proyectos`, label: t("nav.projects") },
+    { href: `/${locale}/servicios`, label: t("nav.services") },
+    { href: `/${locale}/contacto`, label: t("nav.contact") },
   ];
 
   useEffect(() => {
@@ -28,8 +33,8 @@ export function Navbar() {
     <nav className="fixed top-0 z-50 w-full border-b border-border/50 bg-surface/80 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between h-16">
-          <a href="/es/" className="flex items-center gap-2 text-xl font-bold text-text tracking-tight">
-            <span className="text-neon-cyan">&lt;</span>AM<span className="text-neon-cyan">/&gt;</span>
+          <a href={`/${locale}/`} className="flex items-center gap-2 text-xl font-bold text-text tracking-tight">
+            <span className="text-neon-cyan"><</span>AM<span className="text-neon-cyan">/></span>
           </a>
           <div className="hidden md:flex items-center gap-8 text-sm font-medium">
             {links.map((link) => (
@@ -66,15 +71,5 @@ export function Navbar() {
         )}
       </AnimatePresence>
     </nav>
-  );
-}
-
-function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">("dark");
-  useEffect(() => { const stored = localStorage.getItem("theme") as "light" | "dark" | null; setTheme(stored ?? "dark"); }, []);
-  return (
-    <button onClick={() => setTheme((p) => (p === "dark" ? "light" : "dark"))} className="w-10 h-10 rounded-lg bg-surface border border-border flex items-center justify-center">
-      {theme === "dark" ? "☀️" : "🌙"}
-    </button>
   );
 }
