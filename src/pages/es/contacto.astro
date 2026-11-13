@@ -1,0 +1,29 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { ContactForm } from "@/components/ContactForm";
+import { es } from "@/content/config/translations/es";
+
+const { locale } = Astro.params;
+const t = es;
+
+export const prerender = true;
+---
+
+<BaseLayout locale={locale as "es" | "en"} title={t.contact.title} description={t.contact.subtitle}>
+  <section class="py-20 px-6 min-h-[85vh] flex flex-col items-center justify-center">
+    <ContactForm
+      t={(key: string) => {
+        const parts = key.split(".");
+        let val: any = t;
+        for (const part of parts) val = val?.[part];
+        return typeof val === "string" ? val : key;
+      }}
+    />
+  </section>
+</BaseLayout>
+
+<style is:global>
+  body { margin: 0; font-family: 'Space Grotesk', sans-serif; background: #050507; color: #fff; }
+  a { color: #22d3ee; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>

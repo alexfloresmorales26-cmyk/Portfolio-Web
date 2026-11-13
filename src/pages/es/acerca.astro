@@ -1,0 +1,95 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { es } from "@/content/config/translations/es";
+import { en } from "@/content/config/translations/en";
+import { useLang } from "@/components/LangProvider";
+
+const { locale } = Astro.params;
+const dict = locale === "en" ? en : es;
+const t = dict;
+
+export const prerender = true;
+---
+
+<BaseLayout
+  locale={locale as "es" | "en"}
+  title={t.about.title}
+  description={`${t.about.name} - ${t.about.role}`}
+>
+  <section class="relative min-h-[90vh] flex flex-col items-center justify-center px-6 pt-20 pb-12">
+    {/* Decoración */}
+    <div class="absolute inset-0 -z-10 opacity-40">
+      <div class="absolute top-1/5 left-1/5 w-72 h-72 border border-neon-cyan/20 rounded-full animate-pulse" />
+      <div class="absolute bottom-1/4 right-1/5 w-80 h-80 border border-neon-magenta/20 rounded-full animate-pulse" style="animation-delay: 1s" />
+    </div>
+
+    <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+      <div class="relative">
+        <div class="absolute -inset-1 bg-gradient-to-r from-neon-cyan to-neon-magenta rounded-2xl blur opacity-30" />
+        <div class="relative border-glow p-1">
+          <div class="bg-surface rounded-2xl p-8 border border-border">
+            <img
+              src="/images/profile.svg"
+              alt="Perfil Alejandro"
+              class="w-48 h-48 rounded-xl mx-auto mb-6 object-cover border border-border"
+              onerror="this.style.display='none'"
+            />
+            <div class="w-48 h-48 rounded-xl mx-auto mb-6 bg-surface-hover border border-border flex items-center justify-center text-neon-cyan text-2xl" aria-hidden="true">AM</div>
+            <h2 class="text-3xl font-bold text-text mb-2">{t.about.name}</h2>
+            <p class="text-neon-cyan font-semibold text-lg mb-4">{t.about.role}</p>
+            <p class="text-text-muted leading-relaxed text-sm">{t.about.bio}</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-8">
+        <div class="border-glow p-6">
+          <h3 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+            <span class="w-1 h-5 bg-neon-cyan rounded-full" /> {t.about.education}
+          </h3>
+          <div class="space-y-3">
+            <div>
+              <p class="text-text font-semibold">{t.about.educationSchool}</p>
+              <p class="text-text-muted text-sm">{t.about.educationDegree}</p>
+              <p class="text-neon-green text-xs uppercase tracking-wider mt-1">{t.about.educationStatus}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-glow p-6">
+          <h3 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+            <span class="w-1 h-5 bg-neon-green rounded-full" /> {t.about.experience}
+          </h3>
+          <div class="space-y-3">
+            <div>
+              <p class="text-text font-semibold">{t.about.experienceTitle}</p>
+              <p class="text-text-muted text-sm leading-relaxed">{t.about.experienceDesc}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="border-glow p-6">
+          <h3 class="text-xl font-bold text-text mb-4">{t.about.skills}</h3>
+          <div class="flex flex-wrap gap-3" id="skills-logos">
+            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">HTML5</span>
+            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">CSS3</span>
+            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">JavaScript</span>
+            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">TypeScript</span>
+            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">React</span>
+            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">Astro</span>
+            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">Tailwind</span>
+            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">Node.js</span>
+            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">Git</span>
+            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">SQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  body { margin: 0; font-family: 'Space Grotesk', sans-serif; background: #050507; color: #fff; }
+  a { color: #22d3ee; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>

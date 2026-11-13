@@ -1,0 +1,46 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { es } from "@/content/config/translations/es";
+import { en } from "@/content/config/translations/en";
+
+const { locale } = Astro.params;
+const dict = locale === "en" ? en : es;
+const t = dict;
+
+const services = [
+  { title: t.services.webDev.title, desc: t.services.webDev.desc, icon: "💻", color: "neon-cyan" },
+  { title: t.services.repair.title, desc: t.services.repair.desc, icon: "🔧", color: "neon-green" },
+  { title: t.services.fullStack.title, desc: t.services.fullStack.desc, icon: "⚡", color: "neon-magenta" },
+];
+
+export const prerender = true;
+---
+
+<BaseLayout locale={locale as "es" | "en"} title={t.services.title} description={t.services.subtitle}>
+  <section class="py-20 px-6">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl md:text-6xl font-extrabold text-text mb-4">{t.services.title}</h2>
+        <p class="text-lg text-text-muted">{t.services.subtitle}</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-8">
+        {services.map((s) => (
+          <div class="border-glow p-8 hover:border-[var(--neon-${s.color})] transition-all group">
+            <div class="w-14 h-14 rounded-2xl bg-surface-hover flex items-center justify-center text-3xl mb-6 border border-border group-hover:scale-110 transition-transform">{s.icon}</div>
+            <h3 class="text-xl font-bold text-text mb-3">{s.title}</h3>
+            <p class="text-text-muted leading-relaxed text-sm">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-16 text-center">
+        <a href="/es/contacto" class="inline-flex items-center gap-2 px-8 py-3 bg-neon-cyan text-bg font-bold rounded-full hover:bg-neon-cyan/90 shadow-[0_0_20px_rgba(34,211,238,0.6)] hover:shadow-[0_0_35px_rgba(34,211,238,0.9)] transition-all">{t.services.contact} →</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style is:global>
+  body { margin: 0; font-family: 'Space Grotesk', sans-serif; background: #050507; color: #fff; }
+  a { color: #22d3ee; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>

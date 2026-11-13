@@ -1,43 +1,40 @@
-# Astro Starter Kit: Minimal
+# Portfolio Web — Alejandro Flores Morales
 
-```sh
-npm create astro@latest -- --template minimal
+Portafolio personal desarrollado con **Astro 7.4.11**, **Tailwind CSS v4**, **Framer Motion**, **React**, **MDX** y **Resend**.
+
+## Stack
+
+- Astro 7.4.11
+- Tailwind CSS v4 (@tailwindcss/vite)
+- Framer Motion
+- React islands
+- MDX blog con Shiki (sintaxis resaltada)
+- react-hook-form + zod + Resend (formulario de contacto)
+- i18n: es / en (routing /es/ y /en/)
+- SEO: Open Graph, Twitter Cards, JSON-LD, sitemap, RSS
+
+## Estilo
+
+- Fondo oscuro con acentos neón (cyan, magenta, green)
+- Fuentes: Space Grotesk (display) + JetBrains Mono (código/UI)
+- Cards con borde glow/neón animado
+- Hero con bounce scroll-triggered
+
+## Desarrollo
+
+```bash
+npm install
+npm run dev      # astro dev --background (según AGENTS.md)
+npm run build
+npm run preview
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Nota: Astro 7.4.11 requiere Node >=22.23.4. Si usas Node 22.22.x, el binario de astro bloquea el arranque; despliega en un entorno con Node compatible (Vercel, Cloudflare Pages, GitHub Actions).
 
-## 🚀 Project Structure
+## Despliegue
 
-Inside of your Astro project, you'll see the following folders and files:
+Conecta este repo a Vercel o Cloudflare Pages. Asegúrate de definir `RESEND_API_KEY` para el formulario de contacto.
 
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Repositorio
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+https://github.com/alexfloresmorales26-cmyk/Portfolio-Web.git

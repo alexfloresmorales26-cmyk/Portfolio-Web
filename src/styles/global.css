@@ -1,0 +1,212 @@
+/* ==========================================
+   Portfolio Web – Alejandro Flores Morales
+   Dark Neon Theme + Tailwind v4
+   ========================================== */
+
+/* Importar fuentes: Space Grotesk (display) + JetBrains Mono (código/UI) */
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+
+/* ===== Variables de diseño (neón dark) ===== */
+:root {
+  /* Fondo y superficie */
+  --bg: #050507;
+  --surface: #0a0a0f;
+  --surface-hover: #11111a;
+
+  /* Texto */
+  --text: #ffffff;
+  --text-muted: #94a3b8;
+  --text-dim: #475569;
+
+  /* Acentos neón */
+  --neon-cyan: #22d3ee;
+  --neon-magenta: #d946ef;
+  --neon-green: #34d399;
+  --neon-amber: #fbbf24;
+
+  /* Glow */
+  --glow-cyan: rgba(34, 211, 238, 0.35);
+  --glow-magenta: rgba(217, 70, 239, 0.35);
+  --glow-green: rgba(52, 211, 153, 0.35);
+
+  /* Bordes */
+  --border: #1e293b;
+
+  /* Radios y sombras */
+  --radius: 12px;
+  --radius-lg: 16px;
+
+  /* Transiciones */
+  --transition: 0.3s ease;
+}
+
+/* ===== Tailwind v4 custom utilities ===== */
+@theme {
+  /* Colores */
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-hover: var(--surface-hover);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-text-dim: var(--text-dim);
+  --color-neon-cyan: var(--neon-cyan);
+  --color-neon-magenta: var(--neon-magenta);
+  --color-neon-green: var(--neon-green);
+  --color-neon-amber: var(--neon-amber);
+  --color-glow-cyan: var(--glow-cyan);
+  --color-glow-magenta: var(--glow-magenta);
+  --color-glow-green: var(--glow-green);
+  --color-border: var(--border);
+
+  /* Fuentes */
+  --font-sans: "Space Grotesk", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --radius: var(--radius);
+  --radius-lg: var(--radius-lg);
+}
+
+/* ===== Base ===== */
+html {
+  scroll-behavior: smooth;
+  selection: bg-neon-cyan/30 text-bg;
+}
+
+body {
+  @apply bg-bg text-text font-sans antialiased;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ===== Utilidades ===== */
+.text-glow {
+  text-shadow: 0 0 10px var(--glow-cyan);
+}
+
+.text-glow-magenta {
+  text-shadow: 0 0 12px var(--glow-magenta);
+}
+
+.text-glow-green {
+  text-shadow: 0 0 12px var(--glow-green);
+}
+
+.border-glow {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  transition: var(--transition);
+}
+
+.border-glow::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: var(--radius-lg);
+  padding: 2px;
+  background: linear-gradient(
+    135deg,
+    var(--neon-cyan),
+    var(--neon-magenta),
+    var(--neon-green)
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: var(--transition);
+  pointer-events: none;
+}
+
+.border-glow:hover::before,
+.border-glow.active::before {
+  opacity: 1;
+  filter: blur(6px);
+}
+
+.border-glow:hover {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 20px var(--glow-cyan);
+  transform: translateY(-2px);
+}
+
+/* ===== Animaciones ===== */
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 15px var(--glow-cyan), 0 0 30px var(--glow-magenta);
+    opacity: 0.8;
+  }
+  50% {
+    box-shadow: 0 0 25px var(--glow-green), 0 0 50px var(--neon-amber);
+    opacity: 1;
+  }
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-12px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+/* ===== Scroll-triggered bounce (hero) ===== */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-bounce-letter {
+  display: inline-block;
+}
+
+/* ===== View Transitions ===== */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* ===== Scrollbar personalizada ===== */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--neon-cyan);
+}
+
+/* ===== Clase utilitaria para texto con gradiente ===== */
+.text-gradient {
+  background: linear-gradient(135deg, var(--neon-cyan), var(--neon-magenta), var(--neon-green));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-size: 200% 200%;
+  animation: gradient-shift 5s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
