@@ -18,7 +18,7 @@ export const POST: APIRoute = async ({ request }) => {
     if (import.meta.env.RESEND_API_KEY) {
       await resend.emails.send({
         from: "Portfolio <onboarding@resend.dev>",
-        to: ["contacto@alejandroflores.dev"], // cambiar por el email real
+        to: ["alexfloresmorales211@gmail.com"],
         subject: `Nuevo mensaje de contacto de ${name}`,
         replyTo: email,
         text: `
