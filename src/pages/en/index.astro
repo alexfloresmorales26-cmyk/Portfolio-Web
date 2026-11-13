@@ -1,25 +1,61 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { Hero } from "../../components/Hero";
+import { getCollection } from "astro:content";
 import { en } from "../../i18n/translations/en";
 
 const locale = "en";
 const t = en;
 
+const posts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 2);
+
 export const prerender = true;
 ---
 
 <BaseLayout locale={locale} title={t.hero.intro} description={t.hero.subtitle}>
-  <section class="relative min-h-screen flex flex-col items-center justify-center px-6 pt-16">
-    <Hero
-      client:load
-      t={(key: string) => {
-        const parts = key.split(".");
-        let val: any = t;
-        for (const part of parts) val = val?.[part];
-        return typeof val === "string" ? val : key;
-      }}
-      locale={locale}
-    />
+  <section class="relative min-h-[85vh] flex flex-col items-center justify-center px-6 pt-24 pb-12">
+    <Hero client:load locale={locale} />
+  </section>
+
+  <!-- Blog section on Home -->
+  <section class="py-16 px-6 border-t border-border/50 bg-surface/30">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex items-center justify-between mb-8">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-text flex items-center gap-3">
+            <span class="w-1.5 h-8 bg-neon-cyan rounded-full"></span>
+            Blog
+          </h2>
+          <p class="text-text-muted text-sm mt-1">{t.blog.subtitle}</p>
+        </div>
+        <a
+          href={`/${locale}/blog`}
+          class="text-neon-cyan text-sm font-semibold hover:text-neon-cyan/80 transition-colors flex items-center gap-1"
+        >
+          {t.blog.readMore ?? "View full blog"} →
+        </a>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        {posts.map((post) => (
+          <a
+            href={`/${locale}/blog/${post.id}`}
+            class="border-glow p-6 hover:border-neon-cyan/50 transition-all group block"
+          >
+            <span class="text-xs font-mono text-neon-cyan uppercase tracking-wider mb-2 block">Blog Post</span>
+            <h3 class="text-xl font-bold text-text mb-2 group-hover:text-neon-cyan transition-colors">
+              {post.data.title}
+            </h3>
+            <p class="text-text-muted text-sm mb-4 line-clamp-2">{post.data.description}</p>
+            <div class="flex items-center gap-4 text-xs text-text-muted font-mono">
+              <time>{post.data.pubDate.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })}</time>
+              {post.data.readingTime && <span>{post.data.readingTime} min read</span>}
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
   </section>
 </BaseLayout>
