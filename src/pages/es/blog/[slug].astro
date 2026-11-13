@@ -3,7 +3,7 @@ import BaseLayout from "../../../../layouts/BaseLayout.astro";
 import { getCollection, getEntryBySlug, render } from "astro:content";
 import { es } from "@/content/config/translations/es";
 
-export async function getStaticPaths({ paginate }) {
+export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
     params: { slug: post.slug },
