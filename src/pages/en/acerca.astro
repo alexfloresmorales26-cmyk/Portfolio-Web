@@ -5,6 +5,32 @@ import { en } from "../../i18n/translations/en";
 const locale = "en";
 const t = en;
 
+const technicalStrengths = {
+  languages: [
+    { name: "Python", highlight: true },
+    { name: "Java", highlight: true },
+    { name: "JavaScript", highlight: false },
+    { name: "TypeScript", highlight: false },
+    { name: "SQL", highlight: false },
+    { name: "HTML5 / CSS3", highlight: false },
+  ],
+  areas: [
+    { title: "Programming Logic", desc: "Systematic problem solving and algorithmic reasoning." },
+    { title: "Data Structures", desc: "Management and optimization of lists, trees, graphs, and collections." },
+    { title: "Backend & Web Development", desc: "Software architecture, APIs, and structured web applications." },
+    { title: "Automation & Scripting", desc: "Automating repetitive tasks and productivity workflows." },
+  ],
+  tools: [
+    { name: "Linux Mint / Linux Environments", highlight: true },
+    { name: "Git & GitHub", highlight: true },
+    { name: "Terminal / Bash", highlight: true },
+    { name: "VS Code", highlight: false },
+    { name: "Astro", highlight: false },
+    { name: "React", highlight: false },
+    { name: "Tailwind CSS", highlight: false },
+  ],
+};
+
 export const prerender = true;
 ---
 
@@ -13,64 +39,153 @@ export const prerender = true;
   title={t.about.title}
   description={`${t.about.name} - ${t.about.role}`}
 >
-  <section class="relative min-h-[90vh] flex flex-col items-center justify-center px-6 pt-20 pb-12">
-    <div class="absolute inset-0 -z-10 opacity-40">
-      <div class="absolute top-1/5 left-1/5 w-72 h-72 border border-neon-cyan/20 rounded-full animate-pulse" />
-      <div class="absolute bottom-1/4 right-1/5 w-80 h-80 border border-neon-magenta/20 rounded-full animate-pulse" style="animation-delay: 1s" />
+  <section class="relative min-h-[90vh] px-6 pt-28 pb-16">
+    {/* Background decoration */}
+    <div class="absolute inset-0 -z-10 opacity-30 pointer-events-none">
+      <div class="absolute top-1/6 left-1/6 w-80 h-80 border border-neon-cyan/20 rounded-full animate-pulse"></div>
+      <div class="absolute bottom-1/4 right-1/6 w-96 h-96 border border-neon-magenta/20 rounded-full animate-pulse" style="animation-delay: 1.5s"></div>
     </div>
 
-    <div class="max-w-5xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
-      <div class="relative">
-        <div class="absolute -inset-1 bg-gradient-to-r from-neon-cyan to-neon-magenta rounded-2xl blur opacity-30" />
-        <div class="relative border-glow p-1">
-          <div class="bg-surface rounded-2xl p-8 border border-border">
-            <div class="w-48 h-48 rounded-xl mx-auto mb-6 bg-surface-hover border border-border flex items-center justify-center text-neon-cyan text-2xl font-bold font-mono" aria-hidden="true">AM</div>
-            <h2 class="text-3xl font-bold text-text mb-2">{t.about.name}</h2>
-            <p class="text-neon-cyan font-semibold text-lg mb-4">{t.about.role}</p>
-            <p class="text-text-muted leading-relaxed text-sm">{t.about.bio}</p>
+    <div class="max-w-6xl mx-auto space-y-12">
+      {/* Profile Card */}
+      <div class="border-glow p-8 md:p-12 relative overflow-hidden">
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          <div class="lg:col-span-4 flex flex-col items-center text-center">
+            <div class="w-40 h-40 rounded-2xl bg-surface-hover border-2 border-neon-cyan/40 shadow-[0_0_30px_rgba(34,211,238,0.25)] flex items-center justify-center text-neon-cyan text-4xl font-extrabold font-mono mb-4">
+              AM
+            </div>
+            <h2 class="text-2xl font-extrabold text-text">{t.about.name}</h2>
+            <p class="text-neon-cyan font-semibold text-sm mt-1">{t.about.role}</p>
+            <div class="mt-4 inline-flex items-center gap-2 px-3 py-1 bg-surface border border-neon-green/30 rounded-full text-xs font-mono text-neon-green">
+              <span class="w-2 h-2 rounded-full bg-neon-green animate-pulse"></span>
+              {t.about.educationStatus}
+            </div>
+          </div>
+
+          <div class="lg:col-span-8 space-y-4">
+            <div class="border-l-4 border-neon-cyan pl-4 py-1">
+              <h3 class="text-xl md:text-2xl font-bold text-text leading-snug">
+                "Computer Systems Engineering Student | Passionate about logic, software development, and code optimization."
+              </h3>
+            </div>
+            <p class="text-text-muted leading-relaxed text-base pt-2">
+              {t.about.bio}
+            </p>
+            <div class="flex flex-wrap gap-3 pt-2">
+              <span class="px-3.5 py-1.5 bg-surface border border-neon-cyan/30 text-neon-cyan rounded-lg text-xs font-mono font-medium">
+                🐧 Linux Mint & Open Source
+              </span>
+              <span class="px-3.5 py-1.5 bg-surface border border-neon-green/30 text-neon-green rounded-lg text-xs font-mono font-medium">
+                ⚡ Daily Practice: Python & Java
+              </span>
+              <span class="px-3.5 py-1.5 bg-surface border border-neon-magenta/30 text-neon-magenta rounded-lg text-xs font-mono font-medium">
+                🧩 Logic & Algorithms
+              </span>
+            </div>
           </div>
         </div>
       </div>
 
+      {/* Grid: Education and Methodology */}
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="border-glow p-8">
+          <h3 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+            <span class="w-1.5 h-6 bg-neon-cyan rounded-full"></span>
+            {t.about.education}
+          </h3>
+          <div class="space-y-2">
+            <p class="text-lg font-semibold text-text">{t.about.educationSchool}</p>
+            <p class="text-neon-cyan font-mono text-sm">{t.about.educationDegree}</p>
+            <p class="text-text-muted text-sm leading-relaxed pt-2">
+              Academic training focused on computing, system architecture, applied mathematics, and robust software engineering.
+            </p>
+          </div>
+        </div>
+
+        <div class="border-glow p-8">
+          <h3 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
+            <span class="w-1.5 h-6 bg-neon-magenta rounded-full"></span>
+            {t.about.experience}
+          </h3>
+          <div class="space-y-2">
+            <p class="text-lg font-semibold text-text">{t.about.experienceTitle}</p>
+            <p class="text-text-muted text-sm leading-relaxed">
+              {t.about.experienceDesc}
+            </p>
+            <p class="text-text-muted text-sm leading-relaxed pt-2">
+              Daily dedication to self-taught learning and hands-on solution building to solidify a deep engineering foundation.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* Technical Strengths */}
       <div class="space-y-8">
-        <div class="border-glow p-6">
-          <h3 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
-            <span class="w-1 h-5 bg-neon-cyan rounded-full" /> {t.about.education}
+        <div class="text-center md:text-left">
+          <h3 class="text-2xl md:text-3xl font-extrabold text-text flex items-center justify-center md:justify-start gap-3">
+            <span class="w-2 h-7 bg-neon-green rounded-full"></span>
+            {t.about.skills}
           </h3>
-          <div class="space-y-3">
-            <div>
-              <p class="text-text font-semibold">{t.about.educationSchool}</p>
-              <p class="text-text-muted text-sm">{t.about.educationDegree}</p>
-              <p class="text-neon-green text-xs uppercase tracking-wider mt-1">{t.about.educationStatus}</p>
-            </div>
-          </div>
+          <p class="text-text-muted text-sm mt-1">Tools, technologies, and active specialization fields</p>
         </div>
 
-        <div class="border-glow p-6">
-          <h3 class="text-xl font-bold text-text mb-4 flex items-center gap-2">
-            <span class="w-1 h-5 bg-neon-green rounded-full" /> {t.about.experience}
-          </h3>
-          <div class="space-y-3">
-            <div>
-              <p class="text-text font-semibold">{t.about.experienceTitle}</p>
-              <p class="text-text-muted text-sm leading-relaxed">{t.about.experienceDesc}</p>
+        <div class="grid md:grid-cols-3 gap-6">
+          {/* Languages */}
+          <div class="border-glow p-6 space-y-4">
+            <h4 class="text-base font-bold text-text flex items-center gap-2">
+              <span class="text-neon-cyan font-mono text-lg">{'{ }'}</span>
+              {t.about.languagesTitle}
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              {technicalStrengths.languages.map((lang) => (
+                <span
+                  class={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                    lang.highlight
+                      ? "bg-neon-cyan/10 border border-neon-cyan text-neon-cyan font-bold shadow-[0_0_12px_rgba(34,211,238,0.2)]"
+                      : "bg-surface-hover border border-border text-text-muted hover:border-text-muted"
+                  }`}
+                >
+                  {lang.name}
+                </span>
+              ))}
             </div>
           </div>
-        </div>
 
-        <div class="border-glow p-6">
-          <h3 class="text-xl font-bold text-text mb-4">{t.about.skills}</h3>
-          <div class="flex flex-wrap gap-3" id="skills-logos">
-            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">HTML5</span>
-            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">CSS3</span>
-            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">JavaScript</span>
-            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">TypeScript</span>
-            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">React</span>
-            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">Astro</span>
-            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">Tailwind</span>
-            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">Node.js</span>
-            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">Git</span>
-            <span class="px-3 py-1.5 bg-surface-hover border border-border rounded-full text-xs font-mono text-neon-cyan">SQL</span>
+          {/* Areas of Interest */}
+          <div class="border-glow p-6 space-y-4">
+            <h4 class="text-base font-bold text-text flex items-center gap-2">
+              <span class="text-neon-magenta font-mono text-lg">✦</span>
+              {t.about.areasTitle}
+            </h4>
+            <ul class="space-y-3">
+              {technicalStrengths.areas.map((area) => (
+                <li class="border-b border-border/40 pb-2 last:border-b-0 last:pb-0">
+                  <p class="text-xs font-bold text-neon-magenta">{area.title}</p>
+                  <p class="text-xs text-text-muted mt-0.5">{area.desc}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Tools and Environments */}
+          <div class="border-glow p-6 space-y-4">
+            <h4 class="text-base font-bold text-text flex items-center gap-2">
+              <span class="text-neon-green font-mono text-lg">⚙</span>
+              {t.about.toolsTitle}
+            </h4>
+            <div class="flex flex-wrap gap-2">
+              {technicalStrengths.tools.map((tool) => (
+                <span
+                  class={`px-3 py-1.5 rounded-lg text-xs font-mono transition-all ${
+                    tool.highlight
+                      ? "bg-neon-green/10 border border-neon-green text-neon-green font-bold shadow-[0_0_12px_rgba(52,211,153,0.2)]"
+                      : "bg-surface-hover border border-border text-text-muted hover:border-text-muted"
+                  }`}
+                >
+                  {tool.name}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </div>
