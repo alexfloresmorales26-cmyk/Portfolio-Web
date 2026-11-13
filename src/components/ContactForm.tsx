@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useLang } from "@/components/LangProvider";
+import { useLang } from "./LangProvider";
 
 const schema = z.object({
   name: z.string().min(2, "El nombre es requerido"),

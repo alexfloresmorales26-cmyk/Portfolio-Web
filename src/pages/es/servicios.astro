@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { es } from "@/content/config/translations/es";
-import { en } from "@/content/config/translations/en";
+import { es } from "../../content/config/translations/es";
+import { en } from "../../content/config/translations/en";
 
 const { locale } = Astro.params;
 const dict = locale === "en" ? en : es;

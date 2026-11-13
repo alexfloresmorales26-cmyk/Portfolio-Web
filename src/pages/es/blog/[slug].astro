@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "../../../../layouts/BaseLayout.astro";
 import { getCollection, getEntryBySlug, render } from "astro:content";
-import { es } from "@/content/config/translations/es";
+import { es } from "../../../../../content/config/translations/es";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");

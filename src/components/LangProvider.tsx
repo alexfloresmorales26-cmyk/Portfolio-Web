@@ -33,7 +33,7 @@ export function LangProvider({ children, defaultLocale }: { children: React.Reac
 
   useEffect(() => {
     // Load translations dynamically
-    import(`@/content/config/translations/${locale}`).then((mod) => {
+    import(`../content/config/translations/${locale}`).then((mod) => {
       const key = locale === "es" ? "es" : "en";
       setLoadedTranslations(mod[key]);
     });

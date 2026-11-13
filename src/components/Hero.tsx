@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { useLang } from "@/components/LangProvider";
+import { useLang } from "./LangProvider";
 
 interface HeroProps { t: (key: string) => string; locale: "es" | "en"; }
 
